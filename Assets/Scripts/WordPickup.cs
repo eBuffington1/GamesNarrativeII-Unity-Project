@@ -108,8 +108,14 @@ public class WordPickup : MonoBehaviour
 
     void ForcedOff()
     {
-        _slotted = false;
-        transform.position -= new Vector3(0.85f, -0.85f, 0f);
+        if (_slotted == true)
+        {
+            _overlappedBox.SendMessage("Removed");
+            _slotted = false;
+            transform.position -= new Vector3(0.85f, -0.85f, 0f);
+        }
+
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

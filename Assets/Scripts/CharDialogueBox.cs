@@ -24,40 +24,48 @@ public class CharDialogueBox : MonoBehaviour
         _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         
-        GotWord(_defaultDialogue);
-        ResizeBackdrop();
         
-    }
-
-    void GotWord(string word)
-    {
-        if (word == "")
+        if(_defaultDialogue != "")
         {
-            if (_defaultDialogue != "")
-            {
-                UpdateText(_defaultDialogue);
-            }
-            else
-            {
-                EndText();
-            }
+            UpdateText(_defaultDialogue);
         }
         else
         {
-            for (int i = 0; i < _keyWord.Length; i++)
-            {
-                if (_keyWord[i] == word)
-                {
-                    UpdateText(_dialogue[i]);
-                    break;
-                }
-            }
+            UpdateText("");
         }
+
+            ResizeBackdrop();
+        
     }
+
+    //void GotWord(string word)
+    //{
+    //    if (word == "")
+    //    {
+    //        if (_defaultDialogue != "")
+    //        {
+    //            UpdateText(_defaultDialogue);
+    //        }
+    //        else
+    //        {
+    //            EndText();
+    //        }
+    //    }
+    //    else
+    //    {
+    //        for (int i = 0; i < _keyWord.Length; i++)
+    //        {
+    //            if (_keyWord[i] == word)
+    //            {
+    //                UpdateText(_dialogue[i]);
+    //                break;
+    //            }
+    //        }
+    //    }
+    //}
 
     void UpdateText(string String)
     {

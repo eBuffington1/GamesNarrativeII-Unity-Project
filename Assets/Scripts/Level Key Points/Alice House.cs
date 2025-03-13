@@ -45,13 +45,22 @@ public class AliceHouse : MonoBehaviour
     private GameObject _EntrywayWordBox;
 
     [SerializeField]
+    private GameObject _EntrywayWordBox2;
+
+    [SerializeField]
     private GameObject _EntrywayAliceDialogue;
 
     [SerializeField]
     private GameObject _EntrywayDerekDialogue;
 
     [SerializeField]
-    private GameObject _EntrywayDoor;
+    private GameObject _EntrywayDoorWest;
+
+    [SerializeField]
+    private GameObject _EntrywayDoorNorth;
+
+    [SerializeField]
+    private GameObject _TEMPFearWord;
 
     // Dining Room
     [Header("Dining Room")]
@@ -68,6 +77,9 @@ public class AliceHouse : MonoBehaviour
     [SerializeField]
     private GameObject _DiningRoomAliceDialogue;
 
+    [SerializeField]
+    private GameObject _DiningRoomDoorNorth;
+
     // Kitchen
     [Header("Kitchen")]
     [SerializeField]
@@ -81,6 +93,9 @@ public class AliceHouse : MonoBehaviour
 
     [SerializeField]
     private GameObject _KitchenAliceDialogue;
+
+    [SerializeField]
+    private GameObject _KitchenDoorEast;
 
     // Living Room
     [Header("House Living Room")]
@@ -121,6 +136,9 @@ public class AliceHouse : MonoBehaviour
     [SerializeField]
     private GameObject _bedroomStaticsJoy;
 
+    [SerializeField]
+    private GameObject _bedroomDialogue;
+
 
     private void Awake()
     {
@@ -139,7 +157,11 @@ public class AliceHouse : MonoBehaviour
             {
                 DrivewayJoy();
             }
-            else if(word == "remove")
+            else if(word == "Fear")
+            {
+                DrivewayFear();
+            }
+            else if (word == "remove")
             {
                 DrivewayRemove();
             }
@@ -161,6 +183,19 @@ public class AliceHouse : MonoBehaviour
                 EntrywayRemove();
             }
         }
+
+        if(wordObject == _EntrywayWordBox2)
+        {
+            if(word == "Fear")
+            {
+                Entryway2Fear();
+            }
+            else if(word == "remove")
+            {
+                EntrywayRemove2();
+            }
+        }
+
         // Dining Room
         if(wordObject == _DiningRoomWordBox)
         {
@@ -210,6 +245,22 @@ public class AliceHouse : MonoBehaviour
             }
         }
 
+        // Bedroom
+        else if (wordObject == _bedroomWordBox)
+        {
+            if (word == "Joy")
+            {
+                BedroomJoy();
+            }
+            else if (word == "Fear")
+            {
+                BedroomFear();
+            }
+            else if (word == "remove")
+            {
+                BedroomRemove();
+            }
+        }
     }
 
     // DRIVEWAY
@@ -224,15 +275,17 @@ public class AliceHouse : MonoBehaviour
         // Toggle character visibility
         _drivewayStatics.SetActive(true);
 
+        _EntrywayWordBox.SetActive(true);
+
         // Alice Dialogue
-        _drivewayAliceDialogue.SendMessage("UpdateText", "Woooaaahhh look at this place! Come one, we've GOT TO take a peek inside!");
+        _drivewayAliceDialogue.SendMessage("UpdateText", "Come one! Look at this, a royal invitation to tour this beautiful house! We are free to do whatever we please in here!");
 
     }
 
     void DrivewayFear()
     {
         _drivewayStatics.SetActive(true);
-        _drivewayDerekDialogue.SendMessage("UpdateText", "Alice, I really don't think we should do this. I think we've caused enough trouble already.");
+        _drivewayDerekDialogue.SendMessage("UpdateText", "Alice, I really don't think we should do this. We already stole his money, isn't this taking it too far?");
     }
 
     void DrivewayRemove()
@@ -247,24 +300,40 @@ public class AliceHouse : MonoBehaviour
     // ENTRYWAY
     void EntrywayJoy()
     {
+        if (_EntrywayDoorWest)
+        {
+            _EntrywayDoorWest.SetActive(false);
+        }
+        
         _EntrywayStaticsJoy.SetActive(true);
-        _EntrywayAliceDialogue.SendMessage("UpdateText", "Come on, it will be fun. The front door was essentially left open to everyone, why wouldn't we be welcome in?");
-        _EntrywayDerekDialogue.SendMessage("UpdateText", "I feel nervous about this. I don't feel like we'd be welcome.");
+        _EntrywayAliceDialogue.SendMessage("UpdateText", "Oh, come on! It'll be fun! How about this, lets split up and scout out what complementary goods are available!");
+        //_EntrywayDerekDialogue.SendMessage("UpdateText", "I feel nervous about this. I don't feel like we'd be welcome.");
+
+        _EntrywayWordBox2.SetActive(true);
+        _DiningRoomWordBox.SetActive(true);
     }
 
     void EntrywayFear()
     {
-        //if(_EntrywayDoor != null)
-        //{
-        //    Destroy(_EntrywayDoor);
-        //}
-        //if(_livingRoomDoor != null)
-        //{
-
-        //}
 
         _EntrywayStaticsFear.SetActive(true);
-        _EntrywayAliceDialogue.SendMessage("UpdateText", "Wha' wait where are you going. Split up? Fine, just hurry up. I'll go this way.");
+        _EntrywayAliceDialogue.SendMessage("UpdateText", "Who else is here?! I'm not scared of you, whoever you are!");
+    }
+
+    void Entryway2Fear()
+    {
+        if (_EntrywayDoorNorth)
+        {
+            _EntrywayDoorNorth.SetActive(false);
+        }
+        if (_livingRoomDoor)
+        {
+            _livingRoomDoor.SetActive(false);
+        }
+
+        _EntrywayDerekDialogue.SendMessage("UpdateText", "H-hey! What if he comes back?! Well... fine. Just be quick though, I'll look over here.");
+
+        _bedroomWordBox.SetActive(true);
     }
 
     void EntrywayRemove()
@@ -274,14 +343,29 @@ public class AliceHouse : MonoBehaviour
         
         _EntrywayStaticsJoy.SetActive(false);
         _EntrywayStaticsFear.SetActive(false);
+
+        //_TEMPFearWord.SendMessage("ForcedOff");
+        _EntrywayWordBox2.SetActive(false);
+    }
+
+    void EntrywayRemove2()
+    {
+        _EntrywayDerekDialogue.SendMessage("EndText");
     }
 
     // DINING ROOM
     void DiningRoomJoy()
     {
-        _DiningRoomStaticsJoy.SetActive(true);
 
-        _DiningRoomAliceDialogue.SendMessage("UpdateText", "Now calm down and let's split up. If people weren't allowed to take a look around, they'd put up more signs or something!");
+        if (_DiningRoomDoorNorth)
+        {
+            _DiningRoomDoorNorth.SetActive(false);
+        }
+
+        _DiningRoomStaticsJoy.SetActive(true);
+        _KitchenWordBox.SetActive(true);
+
+        _DiningRoomAliceDialogue.SendMessage("UpdateText", "Honestly dining table seems kinda dull. Obviously cheaped out here.");
     }
 
     void DiningRoomFear()
@@ -300,16 +384,23 @@ public class AliceHouse : MonoBehaviour
     // KITCHEN
     void KitchenJoy()
     {
+        if (_KitchenDoorEast)
+        {
+            _KitchenDoorEast.SetActive(false);
+        }
+        
         _KitchenStaticsJoy.SetActive(true);
 
-        _KitchenAliceDialogue.SendMessage("UpdateText", "Well, the owner of this place must be quite nice to have a kitchen like this.");
+        _livingRoomWordBox.SetActive(true);
+
+        _KitchenAliceDialogue.SendMessage("UpdateText", "Ooh got any snacks hiding in here? Don't mind if I indulge myself a moment.");
     }
 
     void KitchenFear()
     {
         _KitchenStaticsFear.SetActive(true);
 
-        _KitchenAliceDialogue.SendMessage("UpdateText", "Hey! Stop it old man, why are you using a gun?! Just leave... me... alone!");
+        _KitchenAliceDialogue.SendMessage("UpdateText", "Hey who are you?! If you didn't want us in here old man maybe you should've-");
     }
 
     void KitchenRemove()
@@ -323,8 +414,10 @@ public class AliceHouse : MonoBehaviour
     // LIVING ROOM
     void LivingRoomJoy()
     {
-        _livingRoomAliceDialogue.SendMessage("UpdateText", "Oooh look at all this stuff! I wonder what other treasures this house holds...");
+        _livingRoomAliceDialogue.SendMessage("UpdateText", "Oooh look at all this stuff! Old man has quite a few badges hanging up here. Don't mind if I... wait what was that?");
         _livingRoomStaticsJoy.SetActive(true);
+
+        _TEMPFearWord.SetActive(true);
     }
 
     void LivingRoomFear()
@@ -346,5 +439,28 @@ public class AliceHouse : MonoBehaviour
         _livingRoomAliceDialogue.SendMessage("EndText");
         _livingRoomStaticsJoy.SetActive(false);
         _livingRoomStaticsFear.SetActive(false);
+    }
+
+    // BEDROOM
+    void BedroomJoy()
+    {
+        _bedroomStaticsJoy.SetActive(true);
+
+        _bedroomDialogue.SendMessage("UpdateText", "Okay, I just need to get this job and I can turn my life around. I've been through worse, I can do this.");
+    }
+
+    void BedroomFear()
+    {
+        _bedroomStaticsFear.SetActive(true);
+
+        _bedroomDialogue.SendMessage("UpdateText", "So many health bills... he isn't nearly as rich as she said he was. This is too much, I'm not robbing from this man. Please Alice, don't start another argument over this...");
+    }
+
+    void BedroomRemove()
+    {
+        _bedroomStaticsJoy.SetActive(false);
+        _bedroomStaticsFear.SetActive(false);
+
+        _bedroomDialogue.SendMessage("EndText");
     }
 }
