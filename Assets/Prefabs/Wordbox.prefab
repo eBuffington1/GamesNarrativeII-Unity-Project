@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4850503738260682790}
-  - component: {fileID: 747716491967534187}
   - component: {fileID: 6369840288896851612}
   - component: {fileID: 7360006271922954326}
   - component: {fileID: 9200129169718362667}
+  - component: {fileID: 1062585353403760151}
   m_Layer: 0
-  m_Name: Box_
+  m_Name: Wordbox
   m_TagString: WordBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -35,22 +35,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &747716491967534187
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2762972277781364449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6f35c09ed71f958418f667f497b64700, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _section: 
-  _dialogueBox: {fileID: 0}
-  _sceneHandlerObject: {fileID: 0}
-  _identifier: 
 --- !u!212 &6369840288896851612
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -179,3 +163,15 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1062585353403760151
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2762972277781364449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9d73165f89184a448a7210a074e041cd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

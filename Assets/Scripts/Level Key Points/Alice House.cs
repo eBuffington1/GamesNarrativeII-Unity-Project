@@ -425,7 +425,7 @@ public class AliceHouse : MonoBehaviour
         if (_darkShift == false)
         {
             _darkShift = true;
-            StartCoroutine(_sceneHandler.Blackout(1f));
+            //StartCoroutine(_sceneHandler.Blackout(1f));
             _goldHouseTiles.SetActive(false);
             _darkHouseTiles.SetActive(true);
         }

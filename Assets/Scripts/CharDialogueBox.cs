@@ -6,8 +6,8 @@ public class CharDialogueBox : MonoBehaviour
     private TextMeshPro _text;
     private SpriteRenderer _spriteRenderer;
 
-    [SerializeField]
-    private bool _isActive = false;
+    //[SerializeField]
+    //private bool _isActive = false;
 
     [SerializeField]
     private string[] _keyWord = { "Scared" };
@@ -69,14 +69,14 @@ public class CharDialogueBox : MonoBehaviour
 
     void UpdateText(string String)
     {
-        _isActive = true;
+        //_isActive = true;
         _text.text = String;
         ResizeBackdrop();
     }
 
     void EndText()
     {
-        _isActive = false;
+        //_isActive = false;
         _text.text = "";
         _spriteRenderer.size = new Vector2(_spriteRenderer.size.x, 0);
     }

@@ -1,70 +1,52 @@
-using TMPro;
 using UnityEngine;
+using UnityEngine.InputSystem;
+
+public enum Select { Joy, Fear };
 
 public class GameController : MonoBehaviour
 {
-    [SerializeField]
-    private GameObject _TextBox;
+    [Header("Word Selection")]
+    public Select curSelection;
+    [SerializeField] public int maxSelection = 0;
 
-    [SerializeField]
-    private GameObject[] _keyPoints;
+    [Header("UI")]
+    [SerializeField] private GameObject topHUD;
 
-    [SerializeField]
-    private GameObject[] _wordBoxes;
+    private InputSystem_Actions inputSys;
 
-
-    private GameObject _linkedWord;
-    private Camera myMainCamera;
-    private LayerMask _mask;
-
-    void Start()
+    private void Start()
     {
-        myMainCamera = Camera.main;
-
-        _mask = LayerMask.GetMask("CanClick");
+        inputSys = new InputSystem_Actions();
     }
 
-    void Update()
+    private void OnPrevious()
     {
-        if (Input.GetMouseButtonDown(0))
+        // If on leftmost...
+        if (curSelection == 0)
         {
-            RayCast();
-        }
-    }
-
-    void RayCast()
-    {
-        Ray ray = myMainCamera.ScreenPointToRay(Input.mousePosition);
-        RaycastHit2D hit = Physics2D.Raycast(ray.origin, ray.direction, Mathf.Infinity, _mask);
-
-        if(hit.collider != null && hit.collider.gameObject.tag == "CanClick")
-        {
-            ClickedObject(hit.collider.gameObject, hit.point);
-            
+            curSelection = (Select)maxSelection;
         }
         else
         {
-            MiscClick();
+            curSelection--;
         }
+        topHUD.SendMessage("MoveSelectedWord", curSelection);
+        Debug.Log("previous to " + curSelection);
     }
 
-    void ClickedObject(GameObject clicked, Vector2 point)
+    private void OnNext()
     {
-        // Send message to Clicked function
-        clicked.SendMessage("Clicked", point);
+        // If on rightmost, reset to start
+        if (curSelection == (Select)maxSelection)
+        {
+            curSelection = 0;
+        }
+        else
+        {
+            curSelection++;
+        }
+        topHUD.SendMessage("MoveSelectedWord", curSelection);
+        Debug.Log("next to " + curSelection);
     }
 
-    void MiscClick()
-    {
-        if (_linkedWord != null)
-        {
-            _linkedWord.SendMessage("Deselect");
-            Debug.Log("testA");
-
-        }
-        else if (_TextBox != null)
-        {
-            _TextBox.SendMessage("DiaClick");
-        }
-    }
 }
