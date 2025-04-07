@@ -7,6 +7,7 @@ TagManager:
   - CanClick
   - WordBox
   - DialogueBox
+  - Interact
   layers:
   - Default
   - TransparentFX

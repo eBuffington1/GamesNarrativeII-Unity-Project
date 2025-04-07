@@ -1,10 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public enum Select { Joy, Fear };
+public enum Select {Blank = -1, Joy, Fear };
 
 public class GameController : MonoBehaviour
 {
+    PlayerInteraction playerInteraction;
+
     [Header("Word Selection")]
     public Select curSelection;
     [SerializeField] public int maxSelection = 0;
@@ -12,14 +14,8 @@ public class GameController : MonoBehaviour
     [Header("UI")]
     [SerializeField] private GameObject topHUD;
 
-    private InputSystem_Actions inputSys;
 
-    private void Start()
-    {
-        inputSys = new InputSystem_Actions();
-    }
-
-    private void OnPrevious()
+    public void OnPrevious()
     {
         // If on leftmost...
         if (curSelection == 0)
@@ -31,10 +27,10 @@ public class GameController : MonoBehaviour
             curSelection--;
         }
         topHUD.SendMessage("MoveSelectedWord", curSelection);
-        Debug.Log("previous to " + curSelection);
+        //Debug.Log("previous to " + curSelection);
     }
 
-    private void OnNext()
+    public void OnNext()
     {
         // If on rightmost, reset to start
         if (curSelection == (Select)maxSelection)
@@ -46,7 +42,7 @@ public class GameController : MonoBehaviour
             curSelection++;
         }
         topHUD.SendMessage("MoveSelectedWord", curSelection);
-        Debug.Log("next to " + curSelection);
+        //Debug.Log("next to " + curSelection);
     }
 
 }
