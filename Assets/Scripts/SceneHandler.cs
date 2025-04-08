@@ -93,22 +93,57 @@ public class SceneHandler : MonoBehaviour
                 // If wordbox already has curWord, remove it
                 if(wordBox.heldWord == gameController.curSelection)
                 {
-                    wordBox.RemoveWord();
-
-                    _wordBoxList[i].Word = Select.Blank;
+                    RemoveWord(gameObject, i);
                 }
                 // Otherwise add curWord
                 else
                 {
-                    wordBox.RemoveWord();
-                    wordBox.ReceiveWord(gameController.curSelection);
-
-                    _wordBoxList[i].Word = gameController.curSelection;
+                    AddWord(gameObject, i);
                 }
 
                 break;
             }
         }
     }
+
+    void RemoveWord(GameObject gameObject, int listPos)
+    {
+        WordBox wordBox = gameObject.GetComponent<WordBox>();
+
+        // Update word box visual
+        wordBox.RemoveWord();
+
+        // Update wordbox list
+        _wordBoxList[listPos].Word = Select.Blank;
+    }
+
+    void AddWord(GameObject gameObject, int listPos)
+    {
+        WordBox wordBox = gameObject.GetComponent<WordBox>();
+
+        // Remove other word boxes that contains word
+        for (int i = 0; i < _wordBoxList.Count; i++)
+        {
+            // Skip current word
+            if (i == listPos)
+            {
+                continue;
+            }
+
+            // Remove duplicate word, break since there should be only one other word
+            if (_wordBoxList[i].Word == gameController.curSelection)
+            {
+                RemoveWord(_wordBoxList[i].WordBox, i);
+                break;
+            }
+        }
+
+        // Update word box visual
+        wordBox.ReceiveWord(gameController.curSelection);
+
+        // Update word box list
+        _wordBoxList[listPos].Word = gameController.curSelection;
+    }
+
 }
 

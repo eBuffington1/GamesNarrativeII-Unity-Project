@@ -9,10 +9,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4850503738260682790}
+  - component: {fileID: 7281639315879927165}
   - component: {fileID: 6369840288896851612}
   - component: {fileID: 7360006271922954326}
   - component: {fileID: 9200129169718362667}
-  - component: {fileID: 7281639315879927165}
   m_Layer: 0
   m_Name: Wordbox
   m_TagString: WordBox
@@ -37,6 +37,23 @@ Transform:
   - {fileID: 494867529417537751}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7281639315879927165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2762972277781364449}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2021604dbb2cb1459190708efc762eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _textBackdrop: {fileID: 3786824477857210484}
+  _textObject: {fileID: 5458106846868774980}
+  heldWord: -1
+  joyColor: {r: 1, g: 0.88957554, b: 0.23113209, a: 1}
+  fearColor: {r: 0.7247426, g: 0.28773582, b: 1, a: 1}
 --- !u!212 &6369840288896851612
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -165,20 +182,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &7281639315879927165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2762972277781364449}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2021604dbb2cb1459190708efc762eb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _textBackdrop: {fileID: 3786824477857210484}
-  _textObject: {fileID: 5458106846868774980}
 --- !u!1 &3786824477857210484
 GameObject:
   m_ObjectHideFlags: 0
@@ -380,7 +383,7 @@ MonoBehaviour:
   m_fontColor32:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+  m_fontColor: {r: 0, g: 0, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

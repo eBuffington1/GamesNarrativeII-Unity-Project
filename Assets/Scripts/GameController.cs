@@ -8,15 +8,20 @@ public class GameController : MonoBehaviour
     PlayerInteraction playerInteraction;
 
     [Header("Word Selection")]
-    public Select curSelection;
+    public Select curSelection = (Select)0;
     [SerializeField] public int maxSelection = 0;
 
     [Header("UI")]
     [SerializeField] private GameObject topHUD;
 
 
-    public void OnPrevious()
+    public void OnPrevious(InputAction.CallbackContext context)
     {
+        if (!context.performed)
+        {
+            return;
+        }
+
         // If on leftmost...
         if (curSelection == 0)
         {
@@ -30,8 +35,13 @@ public class GameController : MonoBehaviour
         //Debug.Log("previous to " + curSelection);
     }
 
-    public void OnNext()
+    public void OnNext(InputAction.CallbackContext context)
     {
+        if (!context.performed)
+        {
+            return;
+        }
+
         // If on rightmost, reset to start
         if (curSelection == (Select)maxSelection)
         {

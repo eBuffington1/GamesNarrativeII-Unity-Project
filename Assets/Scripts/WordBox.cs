@@ -9,8 +9,13 @@ public class WordBox : MonoBehaviour
     [SerializeField] GameObject _textBackdrop;
     [SerializeField] GameObject _textObject;
     TextMeshPro _textTMP;
+    SpriteRenderer _textBackdropRender;
 
     public Select heldWord = Select.Blank;
+
+    [Header("Word Colors")]
+    [SerializeField] Color joyColor;
+    [SerializeField] Color fearColor;
 
     private void Awake()
     {
@@ -18,6 +23,7 @@ public class WordBox : MonoBehaviour
         _sceneHandler = _sceneHandlerObject.GetComponent<SceneHandler>();
 
         _textTMP = _textObject.GetComponent<TextMeshPro>();
+        _textBackdropRender = _textBackdrop.GetComponent<SpriteRenderer>();
     }
 
     private void Start()
@@ -34,7 +40,7 @@ public class WordBox : MonoBehaviour
 
     private void OnDisable()
     {
-        
+        _sceneHandler.RemoveWordBoxFromList(this.gameObject);
     }
 
     public void ReceiveWord(Select word)
@@ -51,9 +57,11 @@ public class WordBox : MonoBehaviour
         {
             case Select.Joy:
                 _textTMP.text = "Joy";
+                _textBackdropRender.color = joyColor;
                 break;
             case Select.Fear:
                 _textTMP.text = "Fear";
+                _textBackdropRender.color = fearColor;
                 break;
             default:
                 Debug.Log("Invalid word received at " + this.name);

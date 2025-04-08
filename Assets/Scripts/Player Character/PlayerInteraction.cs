@@ -25,7 +25,6 @@ public class PlayerInteraction : MonoBehaviour
         if(collision.tag == "WordBox" || collision.tag == "Interact")
         {
             _interactables.Add(collision.gameObject);
-            Debug.Log("Add " + collision.name);
         }
     }
 
@@ -34,7 +33,6 @@ public class PlayerInteraction : MonoBehaviour
         if(_interactables.Contains(collision.gameObject) && collision.tag == "WordBox" || collision.tag == "Interact")
         {
             _interactables.Remove(collision.gameObject);
-            Debug.Log("Remove " + collision.name);
         }
     }
 
