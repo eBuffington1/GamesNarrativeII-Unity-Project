@@ -42,7 +42,7 @@ public class PlayerInteraction : MonoBehaviour
         GameObject _closest = null;
         float _dist = 0;
 
-        // If no interactables nearby, or buttong wasn't fully performed, end function
+        // If no interactables nearby, or button wasn't fully performed, end function
         if (!context.performed || _interactables.Count <= 0)
         {
             return;
