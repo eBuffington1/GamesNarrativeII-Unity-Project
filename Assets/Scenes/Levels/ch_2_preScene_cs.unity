@@ -128,7 +128,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 326448555}
-  - component: {fileID: 326448552}
+  - component: {fileID: 326448557}
   - component: {fileID: 326448554}
   - component: {fileID: 326448553}
   - component: {fileID: 326448556}
@@ -139,18 +139,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &326448552
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 326448551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87816880a6e882349a8039ade169b457, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!320 &326448553
 PlayableDirector:
   m_ObjectHideFlags: 0
@@ -160,7 +148,7 @@ PlayableDirector:
   m_GameObject: {fileID: 326448551}
   m_Enabled: 1
   serializedVersion: 3
-  m_PlayableAsset: {fileID: 11400000, guid: 1aacabd896d41cd4d9af75f44a2dbcf0, type: 2}
+  m_PlayableAsset: {fileID: 11400000, guid: 98f2311644e30a545b6ec1e42171a2ae, type: 2}
   m_InitialState: 0
   m_WrapMode: 2
   m_DirectorUpdateMode: 1
@@ -171,6 +159,12 @@ PlayableDirector:
   - key: {fileID: -4833072813801401591, guid: 1aacabd896d41cd4d9af75f44a2dbcf0, type: 2}
     value: {fileID: 1697801194}
   - key: {fileID: 3836299028818031044, guid: 1aacabd896d41cd4d9af75f44a2dbcf0, type: 2}
+    value: {fileID: 1758045382}
+  - key: {fileID: 7106124949915868251, guid: 98f2311644e30a545b6ec1e42171a2ae, type: 2}
+    value: {fileID: 2085825044}
+  - key: {fileID: 2822750739655672259, guid: 98f2311644e30a545b6ec1e42171a2ae, type: 2}
+    value: {fileID: 1697801194}
+  - key: {fileID: 6919042137002331934, guid: 98f2311644e30a545b6ec1e42171a2ae, type: 2}
     value: {fileID: 1758045382}
   m_ExposedReferences:
     m_References: []
@@ -241,7 +235,7 @@ MonoBehaviour:
     m_ActionName: 'UI/Point[/Mouse/position]'
   - m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 326448552}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ch_1_preScene, Assembly-CSharp
         m_MethodName: ClickTrigger
         m_Mode: 0
@@ -317,6 +311,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &326448557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 326448551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ebaa0518f11f5d64ebc4f21bc5bfb501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &535852558
 GameObject:
   m_ObjectHideFlags: 0
@@ -759,8 +765,8 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Oh, a son? That\u2019s quite silly detective, I don\u2019t recall every
-    having a son."
+  m_text: She was found with several bullet wounds. She's not expected to be conscious
+    for a while.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -769,8 +775,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 7202803
-  m_fontColor: {r: 1, g: 0.41037738, b: 0.41037738, a: 0}
+    rgba: 12171705
+  m_fontColor: {r: 0.7264151, g: 0.7264151, b: 0.7264151, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -876,11 +882,26 @@ MonoBehaviour:
   m_Events:
     m_Signals:
     - {fileID: 11400000, guid: 1c59376db6d110745bd5017e12d6c24f, type: 2}
+    - {fileID: 11400000, guid: 9e104f5b763a0404c95628fd3d407125, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 326448552}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: ch_1_preScene, Assembly-CSharp
+          m_MethodName: timelineSig
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 326448557}
+          m_TargetAssemblyTypeName: ch_2_preScene, Assembly-CSharp
           m_MethodName: timelineSig
           m_Mode: 1
           m_Arguments:
@@ -950,8 +971,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "Ah, I was made aware of your condition. Here, please look at this photograph. 
-    Please try to remember Ms. Wyle\u2026"
+  m_text: Thank you, but that's not a concern for me.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1067,11 +1087,26 @@ MonoBehaviour:
   m_Events:
     m_Signals:
     - {fileID: 11400000, guid: 1c59376db6d110745bd5017e12d6c24f, type: 2}
+    - {fileID: 11400000, guid: 9e104f5b763a0404c95628fd3d407125, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 326448552}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: ch_1_preScene, Assembly-CSharp
+          m_MethodName: timelineSig
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 326448557}
+          m_TargetAssemblyTypeName: ch_2_preScene, Assembly-CSharp
           m_MethodName: timelineSig
           m_Mode: 1
           m_Arguments:
@@ -1141,8 +1176,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: A moment of your time Ms. Wyle. I need to ask about your son, it is for
-    an important investigation.
+  m_text: Detective, here's one of the victims. Still unconscious.
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1151,8 +1185,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 16777215
-  m_fontColor: {r: 1, g: 1, b: 1, a: 0}
+    rgba: 12237498
+  m_fontColor: {r: 0.7294118, g: 0.7294118, b: 0.7294118, a: 0}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1236,11 +1270,26 @@ MonoBehaviour:
   m_Events:
     m_Signals:
     - {fileID: 11400000, guid: 1c59376db6d110745bd5017e12d6c24f, type: 2}
+    - {fileID: 11400000, guid: 9e104f5b763a0404c95628fd3d407125, type: 2}
     m_Events:
     - m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 326448552}
+        - m_Target: {fileID: 0}
           m_TargetAssemblyTypeName: ch_1_preScene, Assembly-CSharp
+          m_MethodName: timelineSig
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+    - m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 326448557}
+          m_TargetAssemblyTypeName: ch_2_preScene, Assembly-CSharp
           m_MethodName: timelineSig
           m_Mode: 1
           m_Arguments:

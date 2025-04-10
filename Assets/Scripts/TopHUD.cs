@@ -2,21 +2,40 @@ using UnityEngine;
 
 public class TopHUD : MonoBehaviour
 {
-    private GameObject selector;
+    [SerializeField] private GameObject selector;
     private RectTransform selectorRect;
-    
+
+    [SerializeField] private GameObject joyPar;
     [SerializeField] private GameObject joyWord;
+    [SerializeField] private GameObject fearPar;
     [SerializeField] private GameObject fearWord;
 
-    void Start()
+    
+    
+
+    void Awake()
     {
-        selector = GameObject.Find("Selector");
         selectorRect = selector.GetComponent<RectTransform>();
 
-        MoveSelectedWord(Select.Joy);
     }
 
-    void MoveSelectedWord(Select word)
+    public void AddWord(Select word)
+    {
+        switch (word)
+        {
+            case Select.Joy:
+                joyPar.SetActive(true);
+                break;
+            case Select.Fear:
+                fearPar.SetActive(true);
+                break;
+            default:
+                Debug.Log("Add word failed for Top HUD");
+                break;
+        }
+    }
+
+    public void MoveSelectedWord(Select word)
     {
         switch (word)
         {

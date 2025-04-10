@@ -133,6 +133,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _interactables: []
+  onInteractObject:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!61 &3507520180640014733
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -396,7 +399,7 @@ MonoBehaviour:
       - m_Target: {fileID: 1975581233588572158}
         m_TargetAssemblyTypeName: PlayerInteraction, Assembly-CSharp
         m_MethodName: Interact
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine

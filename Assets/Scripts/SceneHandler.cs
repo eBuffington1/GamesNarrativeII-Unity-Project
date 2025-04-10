@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.Events;
 
 public class WordSlot
 {
@@ -9,19 +10,11 @@ public class WordSlot
 
 public class SceneHandler : MonoBehaviour
 {
-    //public struct WordSlot
-    //{
-    //    public GameObject WordBox;
-    //    public Select Word;
-
-    //    public WordSlot (GameObject wordBox)
-    //    {
-    //        WordBox = wordBox;
-    //        Word = Select.Blank;
-    //    }
-    //}
 
     public List<WordSlot> _wordBoxList = new List<WordSlot>();
+
+    // Send event of updated words, true = added, false = removed
+    public UnityEvent<GameObject, bool> onUpdateWordBox;
 
     GameController gameController;
     PlayerInteraction playerInteraction;
@@ -34,6 +27,11 @@ public class SceneHandler : MonoBehaviour
         if (playerInteraction)
         {
             playerInteraction.onInteractObject.AddListener(OnInteraction);
+        }
+
+        if(onUpdateWordBox == null)
+        {
+            onUpdateWordBox = new UnityEvent<GameObject, bool>();
         }
     }
 
@@ -115,6 +113,9 @@ public class SceneHandler : MonoBehaviour
 
         // Update wordbox list
         _wordBoxList[listPos].Word = Select.Blank;
+
+        // Invoke signal to level controllers
+        onUpdateWordBox.Invoke(gameObject, false);
     }
 
     void AddWord(GameObject gameObject, int listPos)
@@ -143,7 +144,25 @@ public class SceneHandler : MonoBehaviour
 
         // Update word box list
         _wordBoxList[listPos].Word = gameController.curSelection;
+
+        // Invoke signal to level controllers
+        onUpdateWordBox.Invoke(gameObject, false);
     }
 
+    Select GetValueOfWordBox (GameObject wordBox)
+    {
+        // Find box, return it's position
+        for (int i = 0; i < _wordBoxList.Count; i++)
+        {
+            if(wordBox == _wordBoxList[i].WordBox)
+            {
+                return _wordBoxList[i].Word;
+            }
+        }
+
+        // Return -1 if error otherwise
+        Debug.Log("Could not find " + wordBox.name + " in list");
+        return Select.Blank;
+    }
 }
 
