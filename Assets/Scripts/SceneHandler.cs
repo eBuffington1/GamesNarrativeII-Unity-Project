@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.Events;
+using System;
 
 public class WordSlot
 {
@@ -14,7 +15,8 @@ public class SceneHandler : MonoBehaviour
     public List<WordSlot> _wordBoxList = new List<WordSlot>();
 
     // Send event of updated words, true = added, false = removed
-    public UnityEvent<GameObject, bool> onUpdateWordBox;
+    //public UnityEvent<GameObject, bool> onUpdateWordBox;
+    public event Action<GameObject> onUpdateWordBox;
 
     GameController gameController;
     PlayerInteraction playerInteraction;
@@ -22,35 +24,21 @@ public class SceneHandler : MonoBehaviour
     private void Start()
     {
         gameController = GameObject.Find("GameController").GetComponent<GameController>();
-        playerInteraction = GameObject.FindGameObjectWithTag("Player").GetComponentInChildren<PlayerInteraction>();
 
-        if (playerInteraction)
-        {
-            playerInteraction.onInteractObject.AddListener(OnInteraction);
-        }
-
-        if(onUpdateWordBox == null)
-        {
-            onUpdateWordBox = new UnityEvent<GameObject, bool>();
-        }
+        //if(onUpdateWordBox == null)
+        //{
+        //    onUpdateWordBox = new UnityEvent<GameObject, bool>();
+        //}
     }
 
     private void OnEnable()
     {
-        // Subscribe to player interaction event
-        if (playerInteraction)
-        {
-            playerInteraction.onInteractObject.AddListener(OnInteraction);
-        }
+
     }
 
     private void OnDisable()
     {
-        // Unsubscribe to player interaction event
-        if (playerInteraction)
-        {
-            playerInteraction.onInteractObject.RemoveListener(OnInteraction);
-        }
+
     }
 
     public void AddWordBoxToList (GameObject wordBox)
@@ -69,17 +57,8 @@ public class SceneHandler : MonoBehaviour
         }
     }
 
-    void OnInteraction (GameObject gameObject)
-    {
 
-        // INTERACTION FOR WORDBOX
-        if(gameObject.tag == "WordBox")
-        {
-            WordBoxInteraction(gameObject);
-        }
-    }
-
-    void WordBoxInteraction (GameObject gameObject)
+    public void WordBoxInteraction (GameObject gameObject)
     {
         WordBox wordBox = gameObject.GetComponent<WordBox>();
 
@@ -104,6 +83,11 @@ public class SceneHandler : MonoBehaviour
         }
     }
 
+    void InteractableInteraction (GameObject gameObject)
+    {
+
+    }
+
     void RemoveWord(GameObject gameObject, int listPos)
     {
         WordBox wordBox = gameObject.GetComponent<WordBox>();
@@ -115,7 +99,8 @@ public class SceneHandler : MonoBehaviour
         _wordBoxList[listPos].Word = Select.Blank;
 
         // Invoke signal to level controllers
-        onUpdateWordBox.Invoke(gameObject, false);
+        //onUpdateWordBox.Invoke(gameObject, false);
+        onUpdateWordBox?.Invoke(gameObject);
     }
 
     void AddWord(GameObject gameObject, int listPos)
@@ -146,10 +131,11 @@ public class SceneHandler : MonoBehaviour
         _wordBoxList[listPos].Word = gameController.curSelection;
 
         // Invoke signal to level controllers
-        onUpdateWordBox.Invoke(gameObject, false);
+        //onUpdateWordBox.Invoke(gameObject, true);
+        onUpdateWordBox?.Invoke(gameObject);
     }
 
-    Select GetValueOfWordBox (GameObject wordBox)
+    public Select GetValueOfWordBox (GameObject wordBox)
     {
         // Find box, return it's position
         for (int i = 0; i < _wordBoxList.Count; i++)
@@ -160,7 +146,7 @@ public class SceneHandler : MonoBehaviour
             }
         }
 
-        // Return -1 if error otherwise
+        // Return blank if error otherwise
         Debug.Log("Could not find " + wordBox.name + " in list");
         return Select.Blank;
     }

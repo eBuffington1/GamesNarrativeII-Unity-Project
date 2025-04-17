@@ -5,6 +5,8 @@ public class WordBox : MonoBehaviour
 {
     private GameObject _sceneHandlerObject;
     private SceneHandler _sceneHandler;
+    private GameObject _playerInteractionObject;
+    private PlayerInteraction _playerInteraction;
 
     [SerializeField] GameObject _textBackdrop;
     [SerializeField] GameObject _textObject;
@@ -19,28 +21,54 @@ public class WordBox : MonoBehaviour
 
     private void Awake()
     {
+        _textTMP = _textObject.GetComponent<TextMeshPro>();
+        _textBackdropRender = _textBackdrop.GetComponent<SpriteRenderer>();
+
         _sceneHandlerObject = GameObject.Find("Scene_Handler");
         _sceneHandler = _sceneHandlerObject.GetComponent<SceneHandler>();
 
-        _textTMP = _textObject.GetComponent<TextMeshPro>();
-        _textBackdropRender = _textBackdrop.GetComponent<SpriteRenderer>();
+        _playerInteractionObject = GameObject.FindGameObjectWithTag("Player").transform.GetChild(1).gameObject;
+        if (_playerInteractionObject)
+        {
+            _playerInteraction = _playerInteractionObject.GetComponent<PlayerInteraction>();
+        }
     }
 
     private void Start()
     {
-        _sceneHandler.AddWordBoxToList(this.gameObject);
-
         _textTMP.text = "test";
     }
+
+    
 
     private void OnEnable()
     {
         _sceneHandler.AddWordBoxToList(this.gameObject);
+
+        // Subscribe to player interaction
+        _playerInteraction.onInteractObject += PlayerInteracted;
     }
 
     private void OnDisable()
     {
         _sceneHandler.RemoveWordBoxFromList(this.gameObject);
+
+        // Unsubscribe to player interaction
+        _playerInteraction.onInteractObject -= PlayerInteracted;
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe to player interaction
+        _playerInteraction.onInteractObject -= PlayerInteracted;
+    }
+
+    private void PlayerInteracted(GameObject gameObject)
+    {
+        if (gameObject == this.gameObject)
+        {
+            _sceneHandler.WordBoxInteraction(this.gameObject);
+        }
     }
 
     public void ReceiveWord(Select word)

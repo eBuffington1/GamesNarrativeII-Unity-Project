@@ -9,14 +9,16 @@ public class PlayerInteraction : MonoBehaviour
     BoxCollider2D _collider;
 
     public List<GameObject> _interactables = new List<GameObject>();
-    public UnityEvent<GameObject> onInteractObject;
+    //public UnityEvent<GameObject> onInteractObject;
+
+    public event Action<GameObject> onInteractObject;
 
     private void Start()
     {
-        if (onInteractObject == null)
-        {
-            onInteractObject = new UnityEvent<GameObject>();
-        }
+        //if (onInteractObject == null)
+        //{
+        //    onInteractObject = new UnityEvent<GameObject>();
+        //}
 
     }
 
@@ -68,6 +70,6 @@ public class PlayerInteraction : MonoBehaviour
         }
 
         // Invoke event
-        onInteractObject.Invoke(_closest);
+        onInteractObject?.Invoke(_closest);
     }
 }

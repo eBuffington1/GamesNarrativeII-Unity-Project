@@ -67,14 +67,14 @@ public class CharDialogueBox : MonoBehaviour
     //    }
     //}
 
-    void UpdateText(string String)
+    public void UpdateText(string String)
     {
         //_isActive = true;
         _text.text = String;
         ResizeBackdrop();
     }
 
-    void EndText()
+    public void EndText()
     {
         //_isActive = false;
         _text.text = "";
